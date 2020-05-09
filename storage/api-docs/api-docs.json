@@ -1,0 +1,576 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Ason API documentation",
+        "contact": {
+            "email": "shaxzodbek.qambaraliyev@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api",
+            "description": "Ason backend server"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login with user credentials",
+                "operationId": "ApiAuthLogin",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApiUserLoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfuly loged you in!"
+                    }
+                }
+            }
+        },
+        "/auth/registration": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Registration of user",
+                "operationId": "ApiAuthRegistration",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApiUserRegistrationRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfuly loged you on!"
+                    }
+                }
+            }
+        },
+        "/auth/me": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get user-info by token.",
+                "operationId": "ApiAuthMe",
+                "responses": {
+                    "200": {
+                        "description": "You have access to use system."
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logout user.",
+                "operationId": "ApiAuthLogout",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out."
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Refresh user token.",
+                "operationId": "ApiAuthRefresh",
+                "responses": {
+                    "200": {
+                        "description": "Token successfully refreshed."
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/carts": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get Cart by auth",
+                "operationId": "ApiCartShow",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Update Cart by auth",
+                "operationId": "ApiCartUpdate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApiCartUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cart"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Delete Cart by auth",
+                "operationId": "ApiCartDelete",
+                "responses": {
+                    "200": {
+                        "description": "Cart"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/countries": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Get countries list",
+                "operationId": "ApiCountryIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of countries"
+                    }
+                }
+            }
+        },
+        "/orders": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get orders list",
+                "operationId": "ApiOrderIndex",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of orders"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Update Order by auth",
+                "operationId": "ApiOrderStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApiCartUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Order"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/orders/{id}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get order by id",
+                "operationId": "ApiOrderShow",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Update Order by id",
+                "operationId": "ApiOrderUpdate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApiCartUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Order"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get order by id",
+                "operationId": "ApiOrderDelete",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/product-categories": {
+            "get": {
+                "tags": [
+                    "ProductCategory"
+                ],
+                "summary": "Get product-categories list",
+                "operationId": "ApiProductCategoryIndex",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of product-categories"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/product-categories/{id}": {
+            "get": {
+                "tags": [
+                    "ProductCategory"
+                ],
+                "summary": "Get product-categories by id",
+                "operationId": "ApiProductCategoryShow",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ProductCategory"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get products list",
+                "operationId": "ApiProductIndex",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of products"
+                    }
+                }
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get product by id",
+                "operationId": "ApiProductShow",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ApiCartUpdateRequest": {
+                "title": "Cart update request",
+                "description": "Request object for update cart.",
+                "properties": {
+                    "meta": {
+                        "title": "Meta",
+                        "description": "Cart meta data",
+                        "type": "string",
+                        "format": "json",
+                        "example": "{products: []}"
+                    }
+                },
+                "type": "object"
+            },
+            "ApiUserLoginRequest": {
+                "title": "User login request",
+                "description": "Request object for login user.",
+                "properties": {
+                    "email": {
+                        "title": "Email",
+                        "description": "User email address",
+                        "type": "string",
+                        "format": "email",
+                        "example": "admin@ason.com"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "password",
+                        "type": "string",
+                        "format": "string",
+                        "example": "admin"
+                    }
+                },
+                "type": "object"
+            },
+            "ApiUserRegistrationRequest": {
+                "title": "User logon request",
+                "description": "Request object for log on user.",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "User name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Admin"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "description": "User email address",
+                        "type": "string",
+                        "format": "email",
+                        "example": "admin@ason.com"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "password",
+                        "type": "string",
+                        "format": "string",
+                        "example": "admin"
+                    },
+                    "password_confirmation": {
+                        "title": "Password confirmation",
+                        "description": "password_confirmation",
+                        "type": "string",
+                        "format": "string",
+                        "example": "admin"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "limit": {
+                "name": "limit",
+                "in": "query",
+                "description": "Limit of items(numeric)"
+            },
+            "page": {
+                "name": "page",
+                "in": "query",
+                "description": "Number of page(numeric)"
+            },
+            "include": {
+                "name": "include",
+                "in": "query",
+                "description": "Name of includes(string: media,author)"
+            },
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "ID of items(numeric)"
+            }
+        },
+        "securitySchemes": {
+            "token": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "Bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Product",
+            "description": "Product api collection"
+        },
+        {
+            "name": "Cart",
+            "description": "Cart api collection"
+        },
+        {
+            "name": "Country",
+            "description": "Country api collection"
+        },
+        {
+            "name": "Order",
+            "description": "Order api collection"
+        },
+        {
+            "name": "ProductCategory",
+            "description": "ProductCategory api collection"
+        },
+        {
+            "name": "User",
+            "description": "User api collection"
+        }
+    ]
+}
