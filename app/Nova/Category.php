@@ -5,28 +5,29 @@ namespace App\Nova;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Avatar;
-use Hnassr\NovaKeyValue\KeyValue;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
-use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Status;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\BelongsTo;
+use Benjaminhirsch\NovaSlugField\Slug;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Benjaminhirsch\NovaSlugField\TextWithSlug;
+use Novius\LaravelNovaOrderNestedsetField\OrderNestedsetField;
 
-class Product extends Resource
+class Category extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\Product';
+    public static $model = 'App\Category';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -47,20 +48,16 @@ class Product extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Title')
-              ->sortable()
-              ->rules('required', 'max:255'),
-            Text::make('Cost')
+            TextWithSlug::make('Title')
+            ->rules('required', 'max:255')
+            ->slug('slug'),
+            Slug::make('Slug'),
+            BelongsTo::make('Parent category', 'parent', 'App\Nova\Category')->nullable(),
+            Boolean::make('Is active')
+              ->trueValue(true)
+              ->falseValue(false),
+            Text::make('Order')
               ->rules('required', 'numeric'),
-            Avatar::make('Cover image')->disk('public'),   
-            BelongsTo::make('Brand')->nullable(),     
-            BelongsToMany::make('Categories'),     
-            Images::make('Gallary')
-                ->conversionOnIndexView('thumb')
-                ->rules('required')
-                ->hideFromIndex(),
-            KeyValue::make('Facilities and amenities', 'meta')->hideFromIndex(), 
-            
         ];
     }
 
@@ -74,6 +71,7 @@ class Product extends Resource
     {
         return [];
     }
+
 
     /**
      * Get the filters available for the resource.

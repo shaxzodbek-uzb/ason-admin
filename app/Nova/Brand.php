@@ -4,29 +4,23 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Status;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\BelongsTo;
-use Benjaminhirsch\NovaSlugField\Slug;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Benjaminhirsch\NovaSlugField\TextWithSlug;
 
-class ProductCategory extends Resource
+class Brand extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\ProductCategory';
+    public static $model = 'App\Brand';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'title';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -47,16 +41,6 @@ class ProductCategory extends Resource
     {
         return [
             ID::make()->sortable(),
-            TextWithSlug::make('Title')
-            ->rules('required', 'max:255')
-            ->slug('slug'),
-            Slug::make('Slug'),
-            BelongsTo::make('Parent category', 'parent', 'App\Nova\ProductCategory')->nullable(),
-            Boolean::make('Is active')
-              ->trueValue(true)
-              ->falseValue(false),
-            Text::make('Order')
-              ->rules('required', 'numeric'),
         ];
     }
 

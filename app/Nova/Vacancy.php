@@ -4,22 +4,16 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Avatar;
-use Hnassr\NovaKeyValue\KeyValue;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\BelongsTo;
 
-class Product extends Resource
+class Vacancy extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\Product';
+    public static $model = 'App\Vacancy';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -47,20 +41,6 @@ class Product extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Title')
-              ->sortable()
-              ->rules('required', 'max:255'),
-            Text::make('Cost')
-              ->rules('required', 'numeric'),
-            Avatar::make('Cover image')->disk('public'),   
-            BelongsTo::make('Brand')->nullable(),     
-            BelongsToMany::make('Categories'),     
-            Images::make('Gallary')
-                ->conversionOnIndexView('thumb')
-                ->rules('required')
-                ->hideFromIndex(),
-            KeyValue::make('Facilities and amenities', 'meta')->hideFromIndex(), 
-            
         ];
     }
 

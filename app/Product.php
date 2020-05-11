@@ -21,5 +21,13 @@ class Product extends Model implements HasMedia
 	{
 	    // $this->addMediaCollection('cover_image')->singleFile();
 	    $this->addMediaCollection('gallary');
-	}
+  }
+  public function brand()
+  {
+    return $this->belongsTo('App\Brand');
+  }
+  public function categories()
+  {
+    return $this->belongsToMany('App\Category');
+  }
 }
