@@ -4,15 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Vacancy;
 use Illuminate\Http\Request;
+use App\Transformer\VacancyTransformer;
 use App\Http\Controllers\Api\ApiController;
 use EllipseSynergie\ApiResponse\Laravel\Response;
 
 class VacancyController extends ApiController
 {
-  public function __constructor(Response $response) {
-    parent::__constructor($response);
-
-  }
   /** 
    * @OA\Get(
    *     path="/vacancies",

@@ -18,6 +18,7 @@
         "benjacho/belongs-to-many-field": "^1.7",
         "benjaminhirsch/nova-slug-field": "^1.2",
         "darkaonline/l5-swagger": "5.8.*",
+        "doctrine/dbal": "^2.10",
         "ebess/advanced-nova-media-library": "^2.9",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",

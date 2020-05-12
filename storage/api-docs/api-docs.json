@@ -123,6 +123,25 @@
                 ]
             }
         },
+        "/brands": {
+            "get": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Get brands - products",
+                "operationId": "ApiBrandIndex",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Brand"
+                    }
+                }
+            }
+        },
         "/carts": {
             "get": {
                 "tags": [
@@ -182,6 +201,66 @@
                 "responses": {
                     "200": {
                         "description": "Cart"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get categories list",
+                "operationId": "ApiCategoryIndex",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/include"
+                    },
+                    {
+                        "$ref": "#/components/parameters/parent_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of categories"
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get categories by id",
+                "operationId": "ApiCategoryShow",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category"
                     }
                 },
                 "security": [
@@ -441,6 +520,25 @@
                     }
                 }
             }
+        },
+        "/vacancies": {
+            "get": {
+                "tags": [
+                    "Vacancy"
+                ],
+                "summary": "Get vacancies",
+                "operationId": "ApiVacancyIndex",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/include"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Vacancy"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -532,6 +630,11 @@
                 "in": "query",
                 "description": "Name of includes(string: media,author)"
             },
+            "parent_id": {
+                "name": "parent_id",
+                "in": "query",
+                "description": "Parent id"
+            },
             "id": {
                 "name": "id",
                 "in": "path",
@@ -565,12 +668,20 @@
             "description": "Order api collection"
         },
         {
-            "name": "ProductCategory",
-            "description": "ProductCategory api collection"
+            "name": "Category",
+            "description": "Category api collection"
         },
         {
             "name": "User",
             "description": "User api collection"
+        },
+        {
+            "name": "User",
+            "description": "Brand api collection"
+        },
+        {
+            "name": "Vacancy",
+            "description": "Vacancy api collection"
         }
     ]
 }

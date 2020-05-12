@@ -5,20 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Brand;
 use Illuminate\Http\Request;
 use App\Transformer\BrandTransformer;
-use App\Http\Controllers\Controller;
-use EllipseSynergie\ApiResponse\Contracts\Response;
+use App\Http\Controllers\Api\ApiController;
+use EllipseSynergie\ApiResponse\Laravel\Response;
 
-class BrandController extends Controller
+class BrandController extends ApiController
 {
-    protected $response;  
-    /**
-     * @param Response $response
-     */
-    public function __construct(Response $response)
-    {
-        $this->response = $response;
-    }
-
   /** 
    * @OA\Get(
    *     path="/brands",
@@ -41,6 +32,6 @@ class BrandController extends Controller
   public function index()
   {
       $brands = Brand::first();
-      return $this->response->withItem($brands, new BrandTransformer);
+      return $this->response->get(['brands' => [$brands, new BrandTransformer]]);
   }
 }

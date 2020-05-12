@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 
 class CartTransformer extends TransformerAbstract
 {
-    protected $includes = ['products'];
+    protected $availableIncludes = ['products'];
     public function transform(Cart $cart)
     {
         return [

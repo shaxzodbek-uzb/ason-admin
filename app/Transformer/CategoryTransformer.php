@@ -1,30 +1,35 @@
 <?php
 namespace App\Transformer;
 
-use App\Product;
+use App\Category;
 use League\Fractal\TransformerAbstract;
 
-class ProductCategoryTransformer extends TransformerAbstract
+class CategoryTransformer extends TransformerAbstract
 {
-    protected $includes = ['children', 'parent'];
-    public function transform(ProductCategory $productCategory)
+    protected $availableIncludes = ['children', 'parent', 'products'];
+    public function transform(Category $category)
     {
         return [
-            'id' => $productCategory->id,
-            'title' => $productCategory->title,
-            'slug' => $productCategory->slug,
-            'order' => $productCategory->order,
+            'id' => $category->id,
+            'title' => $category->title,
+            'slug' => $category->slug,
+            'order' => $category->order,
         ];
     }
-    public function includeParent(ProductCategory $productCategory){
-      $parent = $productCategory->parent;
+    public function includeParent(Category $category){
+      $parent = $category->parent;
       if ($parent)
-        return $this->item($parent, new ProductCategoryTransformer);
+        return $this->item($parent, new CategoryTransformer);
     }
     
-    public function includeChildren(ProductCategory $productCategory){
-      $children = $productCategory->children;
+    public function includeChildren(Category $category){
+      $children = $category->children;
       if ($children)
-        return $this->collection($children, new ProductCategoryTransformer);
+        return $this->collection($children, new CategoryTransformer);
+    }
+    public function includeProducts(Category $category)
+    {
+      if ($category->products)
+        return $this->collection($category->products, new ProductTransformer);
     }
 }

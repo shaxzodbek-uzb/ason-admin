@@ -7,7 +7,6 @@ use League\Fractal\TransformerAbstract;
 class BrandTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['products'];
-    // protected $defaultIncludes = ['products'];
     public function transform(Brand $brand)
     {
       

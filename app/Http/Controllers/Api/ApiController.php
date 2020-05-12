@@ -68,17 +68,8 @@ class ApiController extends Controller
   protected $response;
   public function __construct(Response $response) {
     $this->response = $response;
-  }
-  
-  protected function getResponse($resource, $transformer)
-  {
-    if ($resource instanceof LengthAwarePaginator){
-        return $this->response->withPaginator($resource, $transformer);
-    } else
-    if ($resource instanceof Model){
-        return $this->response->withItem($resource, $transformer);    
-    }else {
-        return $this->response->withCollection($resource, $transformer);    
+    if (isset($_GET['include'])) {
+        $response->getManager()->parseIncludes($_GET['include']);
     }
   }
 

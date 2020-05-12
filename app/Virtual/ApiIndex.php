@@ -34,4 +34,14 @@ class ApiIndex
      * @var string
      */
     public $include;
+    /**
+     * @OA\Parameter(
+     *     in="query",
+     *     name="parent_id",
+     *     description="Parent id",
+     * )
+     *
+     * @var integer
+     */
+    public $parent_id;
 }

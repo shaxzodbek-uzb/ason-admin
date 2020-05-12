@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Avatar;
 use Hnassr\NovaKeyValue\KeyValue;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\BelongsTo;
 
 class Product extends Resource
 {

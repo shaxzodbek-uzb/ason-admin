@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\ProductCategory;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\ApiController;
-use App\Transformer\ProducCategorytTransformer;
+use App\Transformer\CategoryTransformer;
 use EllipseSynergie\ApiResponse\Laravel\Response;
 
-class ProductCategoryController extends ApiController
-{
-    public function __constructor(Response $response) {
-        parent::__constructor($response);
-    }
-
-    
+class CategoryController extends ApiController
+{   
     /**
      * @OA\Get(
      *     path="/categories",
@@ -37,6 +32,9 @@ class ProductCategoryController extends ApiController
      *     ),
      *     @OA\Parameter(
      *          ref="#/components/parameters/include",
+     *     ),     
+     *     @OA\Parameter(
+     *          ref="#/components/parameters/parent_id",
      *     )
      * )
      * Display a listing of the resource.
@@ -45,9 +43,8 @@ class ProductCategoryController extends ApiController
      */
     public function index()
     {
-      $product_categories = Category::all();
-      return $this->response->get(['product_categories' => [$product_categories, new ProducCategorytTransformer]]);
- 
+        $categories =  Category::where('parent_id', request()->get('parent_id', null))->get();
+        return $this->response->get(['categories' => [$categories, new CategoryTransformer]]);
     }
 
 
@@ -78,7 +75,6 @@ class ProductCategoryController extends ApiController
      */
     public function show(Category $category)
     {
-      return $this->response->get(['category' => [$category, new CategoryTransformer]]);
-        
+      return $this->response->get(['category' => [$category, new CategoryTransformer]]);   
     }
 }

@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 
 class VacancyTransformer extends TransformerAbstract
 {
-    protected $includes = [];
+    protected $availableIncludes = [];
     public function transform(Vacancy $vacancy)
     {
         return [
