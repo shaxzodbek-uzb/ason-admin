@@ -11,6 +11,7 @@ class ProductTransformer extends TransformerAbstract
         return [
             'id' => $product->id,
             'title' => $product->title,
+            'cover_image' => $product->cover_image,
             'cost' => $product->cost
         ];
     }

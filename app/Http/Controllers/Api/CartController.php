@@ -6,14 +6,15 @@ use App\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\ApiController;
+use EllipseSynergie\ApiResponse\Laravel\Response;
 
 class CartController extends ApiController
 {
-	public function __constructor(Response $response) {
-		parent::__constructor($response);
-		$this->middleware('auth:api');
+    public function __constructor(Response $response) {
+      parent::__constructor($response);
+      $this->middleware('auth:api');
 
-	}
+    }
     /** 
      * @OA\Get(
      *     path="/carts",

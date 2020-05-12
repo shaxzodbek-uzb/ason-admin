@@ -4,6 +4,10 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Avatar;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Brand extends Resource
@@ -20,7 +24,7 @@ class Brand extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -41,6 +45,12 @@ class Brand extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name')
+              ->sortable()
+              ->rules('required', 'max:255'),
+            TextArea::make('Description'),
+            Avatar::make('Cover image')->disk('public'), 
+            Boolean::make('Is active'),
         ];
     }
 

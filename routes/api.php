@@ -26,8 +26,14 @@ Route::group([
   Route::post('refresh', 'Api\AuthController@refresh');
   Route::post('me', 'Api\AuthController@me');
 });
+Route::group([
+  'middleware' => 'api',
+], function ($router) {
 Route::resource('products', 'Api\ProductController');
 Route::resource('orders', 'Api\OrderController');
 Route::resource('cart', 'Api\CartController');
 Route::resource('countries', 'Api\CountryController');
-Route::resource('product-categories', 'Api\ProductCategoryController');
+Route::resource('categories', 'Api\CategoryController');
+Route::resource('brands', 'Api\BrandController');
+Route::resource('vacancies', 'Api\VacancyController');
+});

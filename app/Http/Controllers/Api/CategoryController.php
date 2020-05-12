@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Product;
+use App\ProductCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use  App\Transformer\ProductTransformer;
 use App\Http\Controllers\Api\ApiController;
+use App\Transformer\ProducCategorytTransformer;
 use EllipseSynergie\ApiResponse\Laravel\Response;
 
-class ProductController extends ApiController
+class ProductCategoryController extends ApiController
 {
     public function __constructor(Response $response) {
         parent::__constructor($response);
     }
+
+    
     /**
      * @OA\Get(
-     *     path="/products",
-     *     operationId="ApiProductIndex",
-     *     tags={"Product"},
-     *     summary="Get products list",
+     *     path="/categories",
+     *     operationId="ApiCategoryIndex",
+     *     tags={"Category"},
+     *     summary="Get categories list",
+     *     security={
+     *       {"token": {}},
+     *     },
      *     @OA\Response(
      *         response="200",
-     *         description="List of products"
+     *         description="List of categories"
      *     ),
      *     @OA\Parameter(
      *           ref="#/components/parameters/limit",
@@ -34,27 +39,30 @@ class ProductController extends ApiController
      *          ref="#/components/parameters/include",
      *     )
      * )
-     * 
-     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $products = Product::all();
-        return $this->response->get(['products' => [$products, new ProductTransformer]]);
+      $product_categories = Category::all();
+      return $this->response->get(['product_categories' => [$product_categories, new ProducCategorytTransformer]]);
+ 
     }
 
+
     /** 
-     * @OA\Get(
-     *     path="/products/{id}",
-     *     operationId="ApiProductShow",
-     *     tags={"Product"},
-     *     summary="Get product by id",
+     *@OA\Get(
+     *     path="/categories/{id}",
+     *     operationId="ApiCategoryShow",
+     *     tags={"Category"},
+     *     summary="Get categories by id",
+     *     security={
+     *       {"token": {}},
+     *     },
      *     @OA\Response(
      *         response="200",
-     *         description="Product"
+     *         description="Category"
      *     ),
      *     @OA\Parameter(
      *          ref="#/components/parameters/id",
@@ -63,15 +71,14 @@ class ProductController extends ApiController
      *          ref="#/components/parameters/include",
      *     )
      * )
-     * 
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Category $category)
     {
-        return $this->response->get(['product' => [$product, new ProductTransformer]]);
+      return $this->response->get(['category' => [$category, new CategoryTransformer]]);
+        
     }
-
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use EllipseSynergie\ApiResponse\Laravel\Response;
 
 class OrderController extends Controller
 {

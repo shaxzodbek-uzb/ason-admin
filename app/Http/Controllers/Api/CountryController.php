@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Api\ApiController;
 use App\Transformer\CountryTransformer;
+use App\Http\Controllers\Api\ApiController;
+use EllipseSynergie\ApiResponse\Laravel\Response;
 
 class CountryController extends ApiController
 {

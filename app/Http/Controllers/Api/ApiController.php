@@ -28,12 +28,20 @@
  *     description="Order api collection",
  * )
  * @OA\Tag(
- *     name="ProductCategory",
- *     description="ProductCategory api collection",
+ *     name="Category",
+ *     description="Category api collection",
  * )
  * @OA\Tag(
  *     name="User",
  *     description="User api collection",
+ * )
+ * @OA\Tag(
+ *     name="User",
+ *     description="Brand api collection",
+ * )
+ * @OA\Tag(
+ *     name="Vacancy",
+ *     description="Vacancy api collection",
  * )
  * @OA\Server(
  *     description="Ason backend server",
@@ -50,16 +58,28 @@
  */
 namespace App\Http\Controllers\Api;
 
-use League\Fractal;
-use League\Fractal\Manager;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 use EllipseSynergie\ApiResponse\Laravel\Response;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
 class ApiController extends Controller
 {
-	
-	protected $response;
-
+  protected $response;
   public function __construct(Response $response) {
     $this->response = $response;
   }
+  
+  protected function getResponse($resource, $transformer)
+  {
+    if ($resource instanceof LengthAwarePaginator){
+        return $this->response->withPaginator($resource, $transformer);
+    } else
+    if ($resource instanceof Model){
+        return $this->response->withItem($resource, $transformer);    
+    }else {
+        return $this->response->withCollection($resource, $transformer);    
+    }
+  }
+
 }
