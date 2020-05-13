@@ -7,6 +7,7 @@ use League\Fractal\TransformerAbstract;
 class CategoryTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['children', 'parent', 'products'];
+    protected $defaultIncludes = ['children'];
     public function transform(Category $category)
     {
         return [
@@ -18,13 +19,13 @@ class CategoryTransformer extends TransformerAbstract
     }
     public function includeParent(Category $category){
       $parent = $category->parent;
-      if ($parent)
+      if (count($parent))
         return $this->item($parent, new CategoryTransformer);
     }
     
     public function includeChildren(Category $category){
       $children = $category->children;
-      if ($children)
+      if (count($children))
         return $this->collection($children, new CategoryTransformer);
     }
     public function includeProducts(Category $category)

@@ -3,32 +3,28 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
-use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Avatar;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\BelongsTo;
 use Benjaminhirsch\NovaSlugField\Slug;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
-use Novius\LaravelNovaOrderNestedsetField\OrderNestedsetField;
+use Illuminate\Http\Request;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Category extends Resource
+class Banner extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\Category';
+    public static $model = 'App\Banner';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'title';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -50,16 +46,12 @@ class Category extends Resource
         return [
             ID::make()->sortable(),
             TextWithSlug::make('Title')
-            ->rules('required', 'max:255')
-            ->slug('slug'),
+              ->rules('required', 'max:255')
+              ->slug('slug'),
             Slug::make('Slug'),
+            Text::make('Url')->rules('required', 'max:255'),
+            Text::make('Description', 'desc')->rules('required', 'max:255'),
             Avatar::make('Image')->disk('public'), 
-            BelongsTo::make('Parent category', 'parent', 'App\Nova\Category')->nullable(),
-            Boolean::make('Is active')
-              ->trueValue(true)
-              ->falseValue(false),
-            Text::make('Order')
-              ->rules('required', 'numeric'),
         ];
     }
 
@@ -73,7 +65,6 @@ class Category extends Resource
     {
         return [];
     }
-
 
     /**
      * Get the filters available for the resource.

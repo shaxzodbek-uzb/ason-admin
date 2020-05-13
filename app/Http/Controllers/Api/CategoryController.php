@@ -43,7 +43,14 @@ class CategoryController extends ApiController
      */
     public function index()
     {
-        $categories =  Category::where('parent_id', request()->get('parent_id', null))->get();
+        $parent_slug = request()->get('parent', false);
+        $categories = [];
+        if ($parent_slug){
+          $category = Category::where('slug', $parent_slug)->first();
+          $categories = Category::descendantsOf($category->id)->toTree($category->id);
+        } else{
+          $categories =  Category::where('parent_id', request()->get('parent_id', null))->get();
+        }
         return $this->response->get(['categories' => [$categories, new CategoryTransformer]]);
     }
 

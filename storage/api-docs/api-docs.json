@@ -417,6 +417,20 @@
                 ]
             }
         },
+        "/pages/home": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Get home page",
+                "operationId": "ApiPagesHome",
+                "responses": {
+                    "200": {
+                        "description": "home page data"
+                    }
+                }
+            }
+        },
         "/product-categories": {
             "get": {
                 "tags": [
@@ -678,6 +692,10 @@
         {
             "name": "User",
             "description": "Brand api collection"
+        },
+        {
+            "name": "Page",
+            "description": "Page api collection"
         },
         {
             "name": "Vacancy",

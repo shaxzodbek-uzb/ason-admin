@@ -39,6 +39,10 @@
  *     name="User",
  *     description="Brand api collection",
  * )
+ *  @OA\Tag(
+ *     name="Page",
+ *     description="Page api collection",
+ * )
  * @OA\Tag(
  *     name="Vacancy",
  *     description="Vacancy api collection",

@@ -8,9 +8,11 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Avatar;
 use Hnassr\NovaKeyValue\KeyValue;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
+use Eminiarts\Tabs\Tabs;
 
 class Product extends Resource
 {
@@ -46,21 +48,28 @@ class Product extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-            Text::make('Title')
-              ->sortable()
-              ->rules('required', 'max:255'),
-            Text::make('Cost')
-              ->rules('required', 'numeric'),
-            Avatar::make('Cover image')->disk('public'),   
-            BelongsTo::make('Brand')->nullable(),     
-            BelongsToMany::make('Categories'),     
-            Images::make('Gallary')
-                ->conversionOnIndexView('thumb')
-                ->rules('required')
-                ->hideFromIndex(),
-            KeyValue::make('Facilities and amenities', 'meta')->hideFromIndex(), 
             
+            new Tabs('Tabs', [
+              'Balance'    => [
+                  ID::make()->sortable(),
+                  Text::make('Title')
+                    ->sortable()
+                    ->rules('required', 'max:255'),
+                  Text::make('Cost')
+                    ->rules('required', 'numeric'),
+                  Avatar::make('Cover image')->disk('public'),   
+                  BelongsTo::make('Brand')->nullable(),     
+                  BelongsToMany::make('Categories'),     
+                  Images::make('Gallary')
+                      ->conversionOnIndexView('thumb')
+                      ->rules('required')
+                      ->hideFromIndex(),
+                  KeyValue::make('Facilities and amenities', 'meta')->hideFromIndex(), 
+                ],
+                'Variation' => [
+                    HasMany::make('Products', 'products')->inline(),
+                ],
+          ]),
         ];
     }
 

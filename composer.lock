@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f3fcbb62280de9a8ffb1b866dbd7f61",
+    "content-hash": "66a58f5f33dfb565ade5e3c890e0ad85",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -949,6 +949,55 @@
             "time": "2020-02-13T22:36:52+00:00"
         },
         {
+            "name": "eminiarts/nova-tabs",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eminiarts/nova-tabs.git",
+                "reference": "b0fb236fc259550b65bc78436f4b37f0a53ceeb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eminiarts/nova-tabs/zipball/b0fb236fc259550b65bc78436f4b37f0a53ceeb3",
+                "reference": "b0fb236fc259550b65bc78436f4b37f0a53ceeb3",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": ">=2.9.0",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Eminiarts\\Tabs\\TabsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Eminiarts\\Tabs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emini Arts GmbH",
+                    "email": "support@eminiarts.ch",
+                    "homepage": "https://eminiarts.ch"
+                }
+            ],
+            "description": "Laravel Nova - Tabs.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "time": "2019-12-18T15:30:55+00:00"
+        },
+        {
             "name": "erusev/parsedown",
             "version": "1.7.4",
             "source": {
@@ -1452,6 +1501,54 @@
                 "nsm"
             ],
             "time": "2020-03-04T05:33:20+00:00"
+        },
+        {
+            "name": "kirschbaum-development/nova-inline-relationship",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kirschbaum-development/nova-inline-relationship.git",
+                "reference": "e1d05de11ae1271e99ba20597fb6988a0f402e3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kirschbaum-development/nova-inline-relationship/zipball/e1d05de11ae1271e99ba20597fb6988a0f402e3e",
+                "reference": "e1d05de11ae1271e99ba20597fb6988a0f402e3e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "codedungeon/phpunit-result-printer": "^0.26.2",
+                "laravel/nova": "*",
+                "mockery/mockery": "^1.1",
+                "orchestra/testing": "^4.0",
+                "phpunit/phpunit": "^8.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "KirschbaumDevelopment\\NovaInlineRelationship\\NovaInlineRelationshipServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "KirschbaumDevelopment\\NovaInlineRelationship\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field for displaying relationship properties inline.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "time": "2020-03-05T22:07:37+00:00"
         },
         {
             "name": "laravel/framework",

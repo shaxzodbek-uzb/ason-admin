@@ -29,11 +29,14 @@ Route::group([
 Route::group([
   'middleware' => 'api',
 ], function ($router) {
-Route::resource('products', 'Api\ProductController');
-Route::resource('orders', 'Api\OrderController');
-Route::resource('cart', 'Api\CartController');
-Route::resource('countries', 'Api\CountryController');
-Route::resource('categories', 'Api\CategoryController');
-Route::resource('brands', 'Api\BrandController');
-Route::resource('vacancies', 'Api\VacancyController');
+    Route::resource('products', 'Api\ProductController');
+    Route::resource('orders', 'Api\OrderController');
+    Route::resource('cart', 'Api\CartController');
+    Route::resource('countries', 'Api\CountryController');
+    Route::resource('categories', 'Api\CategoryController');
+    Route::resource('brands', 'Api\BrandController');
+    Route::resource('vacancies', 'Api\VacancyController');
+    Route::group(['prefix' => 'pages'], function(){
+      Route::get('home', 'Api\PageController@home');
+    });
 });
