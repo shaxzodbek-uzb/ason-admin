@@ -11,12 +11,17 @@
         {
             "type": "path",
             "url": "./nova"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ProductProperty"
         }
     ],
     "require": {
         "php": "^7.1.3",
         "benjacho/belongs-to-many-field": "^1.7",
         "benjaminhirsch/nova-slug-field": "^1.2",
+        "chinleung/nova-autofill": "^1.0",
         "darkaonline/l5-swagger": "5.8.*",
         "doctrine/dbal": "^2.10",
         "ebess/advanced-nova-media-library": "^2.9",
@@ -29,7 +34,8 @@
         "laravel/framework": "5.8.*",
         "laravel/nova": "*",
         "laravel/tinker": "^1.0",
-        "tymon/jwt-auth": "^1.0"
+        "tymon/jwt-auth": "^1.0",
+        "shaxzodbek/product-property": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

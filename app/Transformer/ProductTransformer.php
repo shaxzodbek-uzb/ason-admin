@@ -15,6 +15,7 @@ class ProductTransformer extends TransformerAbstract
             'title' => $product->title,
             'cover_image' => $product->cover_image,
             'cost' => $product->cost,
+            'meta' => json_decode($product->meta, true),
         ];
     }
     public function includeGallery(Product $product)

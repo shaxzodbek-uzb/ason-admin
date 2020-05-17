@@ -9,6 +9,11 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 class Product extends Model implements HasMedia
 {
+    protected static function boot()
+    {
+        parent::boot();
+    }
+  protected $fillable=["title",'cover_image','cost','meta','brand_id'];
 	use HasMediaTrait;
   public function registerMediaConversions(Media $media = null)
 	{
@@ -32,6 +37,13 @@ class Product extends Model implements HasMedia
   }
   public function products()
   {
-    return $this->hasMany('App\Product','parent_id');
+    return $this->hasMany('App\Product','parent_id', 'id');
+  }
+  public function parent(){
+      return $this->belongsTo('App\Product', 'parent_id', 'id');
+  }
+  public function properties()
+  {
+    return $this->hasMany('App\ProductProperty');
   }
 }

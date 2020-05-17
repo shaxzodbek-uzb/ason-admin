@@ -15,7 +15,8 @@ class MediaTransformer extends TransformerAbstract
             'file_name' => $media->file_name,
             'mime_type' => $media->mime_type,
             'size' => $media->size,
-            'url' => $media->getFullUrl()
+            'url' => $media->getFullUrl(),
+            'thumb' => $media->getFullUrl('thumb'),
         ];
     }
 }

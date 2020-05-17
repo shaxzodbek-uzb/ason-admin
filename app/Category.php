@@ -33,4 +33,8 @@ class Category extends Model
   {
     return $this->belongsToMany('App\Product');
   }
+  public function properties()
+  {
+    return $this->belongsToMany('App\Property');
+  }
 }

@@ -13,6 +13,7 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Eminiarts\Tabs\Tabs;
+use Shaxzodbek\ProductProperty\ProductProperty;
 
 class Product extends Resource
 {
@@ -50,24 +51,28 @@ class Product extends Resource
         return [
             
             new Tabs('Tabs', [
-              'Balance'    => [
+              'Main'    => [
                   ID::make()->sortable(),
                   Text::make('Title')
                     ->sortable()
-                    ->rules('required', 'max:255'),
+                    ->rules('required', 'max:255')
+                    ->autofill(),
                   Text::make('Cost')
-                    ->rules('required', 'numeric'),
+                    ->rules('required', 'numeric')
+                    ->autofill(),
                   Avatar::make('Cover image')->disk('public'),   
-                  BelongsTo::make('Brand')->nullable(),     
+                  BelongsTo::make('Brand')->nullable(),
                   BelongsToMany::make('Categories'),     
                   Images::make('Gallary')
                       ->conversionOnIndexView('thumb')
-                      ->rules('required')
-                      ->hideFromIndex(),
-                  KeyValue::make('Facilities and amenities', 'meta')->hideFromIndex(), 
+                      ->hideFromIndex()
+                      ->autofill(),
+                  KeyValue::make('Features', 'meta')->hideFromIndex()
+                  ->autofill(), 
                 ],
-                'Variation' => [
-                    HasMany::make('Products', 'products')->inline(),
+                'Properties' => [
+                  HasMany::make('Products'),
+                  ProductProperty::make('Properties')->onlyOnDetail(),
                 ],
           ]),
         ];
